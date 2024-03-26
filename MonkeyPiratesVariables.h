@@ -39,16 +39,15 @@ class LastSave {
 extern vector<Character> party;
 extern vector<vector<Character> > ship;
 extern bool dev;
+vector<Character> party;
+bool dev;
 
 //Attack variables
 extern Attack punch;
-Attack punch;
 extern Attack kick;
-Attack kick;
 extern Attack tailWhip;
+Attack punch;
+Attack kick;
 Attack tailWhip;
 
-
-vector<Character> party;
-bool dev;
 #endif

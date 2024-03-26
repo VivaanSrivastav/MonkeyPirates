@@ -80,9 +80,9 @@ Attack CreateAttackValues(string name, int dmg, int crit, int uses, int hit){
 }
 
 void InitializeAttacks(){
-    punch = CreateAttackValues("Punch", 4, 15, 50, 90);
-    kick = CreateAttackValues("Kick", 10, 25, 15, 60);
-    tailWhip = CreateAttackValues("Tail Whip", 2, 5, 3, 100);
+    punch = CreateAttackValues("Punch", 8, 15, 50, 90);
+    kick = CreateAttackValues("Kick", 20, 25, 15, 60);
+    tailWhip = CreateAttackValues("Tail Whip", 4, 5, 3, 100);
 }
 
 void List(vector<Character> toList, bool listDead){

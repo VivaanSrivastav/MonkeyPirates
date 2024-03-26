@@ -11,9 +11,8 @@ using namespace std;
 int main(){
     //Introductory/first sequence of escaping the initial ship
     MainMenu();
-    IntroSequence();    
     InitializeAttacks();
+    IntroSequence();    
     IntroSequence2();
-    IntroSequence3();
     //Clear();s
 }

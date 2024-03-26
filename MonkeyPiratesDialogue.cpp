@@ -36,8 +36,8 @@ void IntroSequence(){
     }
     Character player;
 
-    player.name = "Player"; player.health = 100; player.description = "You, lost and no memory"; player.str = 30; player.def = 10; player.spd = 7; player.maxHealth = 100;
-    player.atks.push_back(punch);
+    player.name = name; player.health = 100; player.description = "You, lost and no memory"; player.str = 30; player.def = 10; player.spd = 9; player.maxHealth = 100;
+    player.atks.push_back(punch); player.atks.push_back(kick); player.atks.push_back(tailWhip);
     party.push_back(player);
 
     if(player.name == "MrTombsSucks123") {
@@ -54,6 +54,26 @@ void IntroSequence(){
     AngryHarith(); Wait(3000);
     cout << "(Door slams shut)" << endl; Wait(2000);
     Door();
+}
+
+void IntroSequencePath1(){
+        Character brackCharacter; brackCharacter.name = "Brack"; brackCharacter.health = 70; brackCharacter.str = 50; brackCharacter.spd = 0; brackCharacter.description = "Little stupid but has the right spirit, wants to sail the 7 seas"; brackCharacter.def = 5; brackCharacter.maxHealth = 100;
+        brackCharacter.atks.push_back(punch); brackCharacter.atks.push_back(tailWhip);
+        vector <Character> tempBrackParty; tempBrackParty.push_back(brackCharacter);
+        BattleTime();
+        vector<string> BrackDialogue; //{"ARGRGH", "WHY CAN'T I HIT YOU", "So....tired", ":("};
+        vector<string> PlayerDialogue; //{"Calm down!", "(He's very slow)", "You done yet?", "You okay there??"};
+        //Not making a save here since this fight is quite literally impossible to lose
+        if(Battle(tempBrackParty, party, BrackDialogue, PlayerDialogue, Brack, SittingMonkey, 1)) Wait(3000);
+        Blank(3);
+        cout << "Brack: Maybe...I panicked too much. DONT HURT ME MORE PLEASE" << endl; Wait(2000);
+        cout << "You: I'm heading out" << endl; Wait(2000);
+        cout << "Brack: ..." << endl; Wait(2000);
+        cout << "Brack: TAKE ME WITH YOU" << endl; Wait(2000);
+        cout << "You: ???" << endl; Wait(2000);
+        cout << "Brack: I don't like it here...." << endl; Wait(2000);
+        BrackFace(); Blank(1);
+        cout << "You: Fine. Let's find a way out" << endl;
 }
 
 void IntroSequence2(){
@@ -96,26 +116,8 @@ void IntroSequence2(){
             cout << "Brack: HEY WHAT ARE YOU DOING PRISONER GUY LETS FIGHT" << endl; Wait(2000);
             cout << "You: WAIT WAIT WAIT" << endl; Wait(2500);
             cout << "Brack: AAAAAA" << endl; Wait(2000);
+            IntroSequencePath1();
         }
     }
 }
 
-void IntroSequence3(){
-        Character brackCharacter; brackCharacter.name = "Brack"; brackCharacter.health = 70; brackCharacter.str = 50; brackCharacter.def = 0; brackCharacter.description = "Little stupid but has the right spirit, wants to sail the 7 seas"; brackCharacter.def = 5; brackCharacter.maxHealth = 100;
-        brackCharacter.atks.push_back(punch);
-        vector <Character> tempBrackParty; tempBrackParty.push_back(brackCharacter);
-        BattleTime();
-        vector<string> BrackDialogue; //{"ARGRGH", "WHY CAN'T I HIT YOU", "So....tired", ":("};
-        vector<string> PlayerDialogue; //{"Calm down!", "(He's very slow)", "You done yet?", "You okay there??"};
-        //Not making a save here since this fight is quite literally impossible to lose
-        if(Battle(tempBrackParty, party, BrackDialogue, PlayerDialogue, Brack, SittingMonkey, 1)) Wait(3000);
-        Blank(3);
-        cout << "Brack: Maybe...I panicked too much. DONT HURT ME MORE PLEASE" << endl; Wait(2000);
-        cout << "You: I'm heading out" << endl; Wait(2000);
-        cout << "Brack: ..." << endl; Wait(2000);
-        cout << "Brack: TAKE ME WITH YOU" << endl; Wait(2000);
-        cout << "You: ???" << endl; Wait(2000);
-        cout << "Brack: I don't like it here...." << endl; Wait(2000);
-        BrackFace(); Blank(1);
-        cout << "You: Fine. Let's find a way out" << endl;
-}
