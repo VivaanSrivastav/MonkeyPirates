@@ -11,7 +11,8 @@ class Attack {
         string name;
         double dmg;
         double critChance;
-        double uses;
+        int uses;
+        int maxUses;
         double hitChance;
         void (*Sscii)();
 };

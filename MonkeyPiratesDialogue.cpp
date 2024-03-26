@@ -35,8 +35,11 @@ void IntroSequence(){
         //ClearLines(2);
     }
     Character player;
-    player.name = name; player.health = 100; player.description = "You, lost and no memory"; player.str = 5; player.def = 10; player.spd = 10;
+
+    player.name = "Player"; player.health = 100; player.description = "You, lost and no memory"; player.str = 30; player.def = 10; player.spd = 7; player.maxHealth = 100;
+    player.atks.push_back(punch);
     party.push_back(player);
+
     if(player.name == "MrTombsSucks123") {
         dev = true;
         cout << "DEVELOPER MODE ACTIVATED" << endl;
@@ -98,11 +101,7 @@ void IntroSequence2(){
 }
 
 void IntroSequence3(){
-        Character player;
-        player.name = "Player"; player.health = 100; player.description = "You, lost and no memory"; player.str = 5; player.def = 10; player.spd = 10; player.maxHealth = 100;
-        player.atks.push_back(punch);
-        party.push_back(player);
-        Character brackCharacter; brackCharacter.name = "Brack"; brackCharacter.health = 70; brackCharacter.str = 15; brackCharacter.def = 0; brackCharacter.description = "Little stupid but has the right spirit, wants to sail the 7 seas"; brackCharacter.def = 5; brackCharacter.maxHealth = 100;
+        Character brackCharacter; brackCharacter.name = "Brack"; brackCharacter.health = 70; brackCharacter.str = 50; brackCharacter.def = 0; brackCharacter.description = "Little stupid but has the right spirit, wants to sail the 7 seas"; brackCharacter.def = 5; brackCharacter.maxHealth = 100;
         brackCharacter.atks.push_back(punch);
         vector <Character> tempBrackParty; tempBrackParty.push_back(brackCharacter);
         BattleTime();
@@ -110,6 +109,7 @@ void IntroSequence3(){
         vector<string> PlayerDialogue; //{"Calm down!", "(He's very slow)", "You done yet?", "You okay there??"};
         //Not making a save here since this fight is quite literally impossible to lose
         if(Battle(tempBrackParty, party, BrackDialogue, PlayerDialogue, Brack, SittingMonkey, 1)) Wait(3000);
+        Blank(3);
         cout << "Brack: Maybe...I panicked too much. DONT HURT ME MORE PLEASE" << endl; Wait(2000);
         cout << "You: I'm heading out" << endl; Wait(2000);
         cout << "Brack: ..." << endl; Wait(2000);
