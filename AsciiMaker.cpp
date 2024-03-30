@@ -3,6 +3,7 @@ using namespace std;
 
 int main(){
     vector<vector<string> > lines;
+    string name; cin >> name;
     while(true){
         string a;
         getline(cin, a);
@@ -21,4 +22,5 @@ int main(){
         cout << "\"" << " << endl;";
         cout << endl;
     }
+    cout << lines.size() << endl;
 }

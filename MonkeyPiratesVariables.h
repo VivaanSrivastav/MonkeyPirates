@@ -4,50 +4,51 @@
 using namespace std;
 
 
-// Class for each character
-
+// Class for each attack, names are self explanatory
 class Attack {
     public:
         string name;
-        double dmg;
+        double dmg; // damage
         double critChance;
         int uses;
         int maxUses;
         double hitChance;
-        void (*Sscii)();
+        string description;
+        void (*Ascii)();
 };
 
+// Class for each character, names are self explanatory
 class Character {
     public:
         string name;
         string description;
         double health;
         double maxHealth;
-        double str;
-        double def;
-        double spd;
+        double str; // strength
+        double def; // defense
+        double spd; // speed
         vector<Attack> atks;
         void (*Ascii)();
 };
 
-class LastSave {
-    vector<Character> par;
-    int ship;
-};
-
-// Declare an external variable of type Character
+// party vector for holding the main party
 extern vector<Character> party;
-extern vector<vector<Character> > ship;
-extern bool dev;
 vector<Character> party;
-bool dev;
+
 
 //Attack variables
 extern Attack punch;
 extern Attack kick;
 extern Attack tailWhip;
+extern Attack slap;
+extern Attack throngle;
+extern Attack intimidate;
+extern Attack cornobble; // Real word btw
 Attack punch;
 Attack kick;
 Attack tailWhip;
+Attack slap;
+Attack throngle;
+Attack intimidate;
 
 #endif
