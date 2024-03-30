@@ -88,10 +88,11 @@ void IntroSequencePath2(){
     vector<Attack> harithAttacks;
     harithAttacks.push_back(intimidate); 
     //Impossible to lose
-    Character harithCharacter = CreateCharacter("Harith", "Meanie", 100, 100, 10, 0, 0, harithAttacks, AngryHarith);
+    Character harithCharacter = CreateCharacter("Harith", "Meanie", 75, 100, 10, 0, 0, harithAttacks, AngryHarith);
     vector <Character> tempEnemyParty; tempEnemyParty.push_back(harithCharacter);
     BattleTime();
     if(Battle(tempEnemyParty, party)) BattleWon();
+    cout << "(Harith passes out)" << endl; Wait(2000);
 }
 
 void IntroSequence2(){

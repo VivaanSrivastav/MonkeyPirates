@@ -138,6 +138,7 @@ void FlashAscii(void (Ascii)()){
         Clear();
         Wait(500);
     }
+    Wait(500);
 }
 
 /*
@@ -157,11 +158,11 @@ void dmgMessage(Character attacker, Character defender, int atkUsed, double dmgD
 }
 
 // To avoid repitition, further information after each attack
-void completeDamage(vector<Character> attacker, vector<Character> defender, int memberAttacking, int memberDefending, double dmgDone, int memberCount){
-    if(dmgDone > attacker[memberDefending].health) dmgDone = attacker[memberDefending].health;
-    cout << defender[memberDefending].name << "'s health is now " << defender[memberDefending].health << "/" << defender[memberDefending].maxHealth << endl; Wait(500);
-    if(defender[memberDefending].health <= 0) {
-        cout << defender[memberDefending].name << " IS KNOCKED OUT!!" << endl;
+void completeDamage(vector<Character> attacker, vector<Character> defender, int memberAttackingNum, int memberDefendingNum, double dmgDone, int memberCount){
+    if(dmgDone > attacker[memberDefendingNum].health) dmgDone = attacker[memberDefendingNum].health;
+    cout << defender[memberDefendingNum].name << "'s health is now " << defender[memberDefendingNum].health << "/" << defender[memberDefendingNum].maxHealth << endl; Wait(500);
+    if(defender[memberDefendingNum].health <= 0) {
+        cout << defender[memberDefendingNum].name << " IS KNOCKED OUT!!" << endl;
         memberCount--;
     }
 }
@@ -177,9 +178,9 @@ asciiAttacker and asciiDefender are general asciis to use to represent the party
 Difficulty TBD
 
 It runs a "while(true)" loop until all members of a party are defeated
-memberAttacking keeps track of who is attacking on the current turn.
-memberDefending keeps track of who is defending (taking the attack) in the current turn.
-attackUsed keeps track of which attack the memberAttacking is using.
+memberAttackingNum keeps track of who is attacking on the current turn.
+memberDefendingNum keeps track of who is defending (taking the attack) in the current turn.
+attackUsed keeps track of which attack the memberAttackingNum is using.
 dmgDone is used for the final damage the attack does.
 The turn bool manages who's turn it is, true being the users, and false being the NPC
 
@@ -200,6 +201,7 @@ If a member died, either defenderCount or attackerCount goes down (respectively)
 
 Note: Some slight repition of code at the end, but it was very difficult to try to not repeat. 
 I talked to you about it and you said it was fine, so don't dock marks pls.
+Also note that a lot of this can be shortened using pointers but that feels way overkill
 
 */
 bool Battle(vector<Character> attacker, vector<Character> defender){
@@ -208,7 +210,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
     int defenderCount = defender.size();
     int attackerCount = attacker.size();
     while(true){
-        int memberDefending; int memberAttacking; int attackUsed; double dmgDone;
+        int memberDefendingNum; int memberAttackingNum; int attackUsed; double dmgDone;
         Divider();
         cout << "Turn " << turnNumber; Blank(2);
 
@@ -233,7 +235,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
                 }
                 if(attacker[stoi(inp)-1].health == 0) cout << "This guy's already defeated! Pick another one that's listed above!" << endl;
             }
-            memberDefending = stoi(inp)-1;
+            memberDefendingNum = stoi(inp)-1;
             
             Blank(2); Wait(500);
             cout << "Which party member would you like to attack with? " << endl; Wait(500);
@@ -249,68 +251,69 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
                 }
                 if(defender[stoi(inp)-1].health == 0) cout << "This guy's already defeated! Pick another one that's listed above!" << endl;
             }
-            memberAttacking = stoi(inp)-1;
+            memberAttackingNum = stoi(inp)-1;
             Blank(2);
             cout << "Which attack would you like to use?" << endl; Wait(500);
-            for(int i = 0; i < defender[memberAttacking].atks.size(); i++){
-                cout << i+1 << ". " << defender[memberAttacking].atks[i].name;
-                cout << " (" << defender[memberAttacking].atks[i].uses << "/" << defender[memberAttacking].atks[i].maxUses << ")" << endl;
+            for(int i = 0; i < defender[memberAttackingNum].atks.size(); i++){
+                cout << i+1 << ". " << defender[memberAttackingNum].atks[i].name;
+                cout << " (" << defender[memberAttackingNum].atks[i].uses << "/" << defender[memberAttackingNum].atks[i].maxUses << ")" << endl;
             }
             Wait(500); Blank(2);
             while(true){
                 cout << "Input one of the numbers above as the attack you would like to use: ";
                 cin >> inp;
-                if(isIntInRange(inp, 1, defender[memberAttacking].atks.size())) break;
+                if(isIntInRange(inp, 1, defender[memberAttackingNum].atks.size())) break;
                 else {
                     cout << "Invalid input, try again " << endl;
                     continue;
                 }
-                if(defender[memberAttacking].atks[stoi(inp)-1].uses == 0) cout << "You ran out of uses here... Pick another attack!" << endl;
+                if(defender[memberAttackingNum].atks[stoi(inp)-1].uses == 0) cout << "You ran out of uses here... Pick another attack!" << endl;
             }
-            attackUsed = stoi(inp)-1;
-            dmgDone = calculateDamage(defender[memberAttacking], attacker[memberDefending], attackUsed);
+            attackUsed = stoi(inp)-1; 
+            dmgDone = calculateDamage(defender[memberAttackingNum], attacker[memberDefendingNum], attackUsed);
             turnNumber++;
         } else{
             cout << " - ENEMY TURN" << endl; Wait(1000);
             cout << "Enemy Party: " << endl;
             List(attacker, true);
-            memberAttacking = rand() % (attacker.size()) + 0;
-            cout << attacker[memberAttacking].name << " is attacking now..."; Blank(2); Wait(1000);
-            attackUsed = rand() % (attacker[memberAttacking].atks.size()) + 0; 
-            memberDefending = rand() % (defender.size()) + 0;
-            dmgDone = calculateDamage(attacker[memberAttacking], defender[memberDefending], attackUsed);
+            memberAttackingNum = rand() % (attacker.size()) + 0;
+            cout << attacker[memberAttackingNum].name << " is attacking now..."; Blank(2); Wait(1000);
+            attackUsed = rand() % (attacker[memberAttackingNum].atks.size()) + 0; 
+            memberDefendingNum = rand() % (defender.size()) + 0;
+            dmgDone = calculateDamage(attacker[memberAttackingNum], defender[memberDefendingNum], attackUsed);
         }
 
         if(dmgDone == INT_MAX){
-                cout << "ATTACK MISSED" << endl;
+                cout << "[ATTACK MISSED]" << endl; Wait(1000);
                 dmgDone = 0;
             } else if(dmgDone < 0){
-                cout << "CRITICAL HIT!!" << endl;
+                cout << "[CRITICAL HIT!!]" << endl; Wait(1000);
                 dmgDone = abs(dmgDone);
             } 
+            // Some slight repitition of code (very hard not to), but I talked to you about it and you said it was okay so I'll keep it.
         if(turn) { 
-            FlashAscii(defender[memberAttacking].atks[attackUsed].Ascii);
-            defender[memberAttacking].atks[attackUsed].uses--;
-            attacker[memberDefending].health-=dmgDone;
-            if(attacker[memberDefending].health <= 0){
+            FlashAscii(defender[memberAttackingNum].atks[attackUsed].Ascii);
+            defender[memberAttackingNum].atks[attackUsed].uses--;
+            attacker[memberDefendingNum].health-=dmgDone;
+            if(attacker[memberDefendingNum].health <= 0){
                 attackerCount--; 
-                attacker[memberDefending].health = 0;
+                attacker[memberDefendingNum].health = 0;
             }
-            dmgMessage(defender[memberDefending], attacker[memberAttacking], attackUsed, dmgDone);
-            completeDamage(defender, attacker, memberAttacking, memberDefending, dmgDone, attackerCount);
+            dmgMessage(defender[memberAttackingNum], attacker[memberDefendingNum], attackUsed, dmgDone);
+            completeDamage(defender, attacker, memberAttackingNum, memberDefendingNum, dmgDone, attackerCount);
             if(attackerCount == 0) return true;
             turn = false;
         }
         else {
-            FlashAscii(attacker[memberAttacking].atks[attackUsed].Ascii);
-            defender[memberDefending].health-=dmgDone;
-            attacker[memberAttacking].atks[attackUsed].uses--;
-            if(defender[memberDefending].health <= 0) {
-                defender[memberDefending].health = 0;
+            FlashAscii(attacker[memberAttackingNum].atks[attackUsed].Ascii);
+            defender[memberDefendingNum].health-=dmgDone;
+            attacker[memberAttackingNum].atks[attackUsed].uses--;
+            if(defender[memberDefendingNum].health <= 0) {
+                defender[memberDefendingNum].health = 0;
                 defenderCount--; 
             }
-            dmgMessage(attacker[memberAttacking], defender[memberDefending], attackUsed, dmgDone);
-            completeDamage(attacker, defender, memberAttacking, memberDefending, dmgDone, defenderCount);
+            dmgMessage(attacker[memberAttackingNum], defender[memberDefendingNum], attackUsed, dmgDone);
+            completeDamage(attacker, defender, memberAttackingNum, memberDefendingNum, dmgDone, defenderCount);
             if(defenderCount == 0) return false;
             turn = true;
         }

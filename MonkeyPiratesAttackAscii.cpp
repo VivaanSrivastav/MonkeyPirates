@@ -73,3 +73,15 @@ void IntimidateAscii(){ // 14 lines
    cout << "                || ||" << endl;
    cout << "               ooO Ooo" << endl;
 }
+
+void SlapAscii(){
+
+}
+
+void ThrongleAscii(){
+
+}
+
+void CornobbleAscii(){
+    
+}
