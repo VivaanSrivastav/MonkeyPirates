@@ -1,3 +1,10 @@
+/*
+Name: Vivaan Srivastav
+Date: March 30, 2024
+Purpose: Holds the variables/objects for the game
+File name: MonkeyPiratesAscii.cpp
+*/
+
 #ifndef Variables_H
 #define Variables_H
 #include <bits/stdc++.h>

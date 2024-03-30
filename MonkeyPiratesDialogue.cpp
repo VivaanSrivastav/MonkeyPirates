@@ -1,3 +1,9 @@
+/*
+Name: Vivaan Srivastav
+Date: March 30, 2024
+Purpose: Main story of the game, holds the functions ran in the main file
+File name: MonkeyPiratesDialogue.cpp
+*/
 #include <bits/stdc++.h>
 #include "MonkeyPiratesVariables.h"
 
@@ -9,7 +15,7 @@ void IntroSequence(){
     cout << "By Vivaan Srivastav" << endl;
     IntroAscii(); Blank(3);  Wait(4000);
     Clear();
-     Wait(2000);
+    Wait(2000);
     cout << "(Voices in front of you, you are unable to see)" << endl;
     cout << "Voice 1: Hey! Hey! Hey! Ok you're awake" << endl;  Wait(2500);
     cout << "Voice 2: No he's not, idiot" << endl;  Wait(2500);
@@ -28,10 +34,9 @@ void IntroSequence(){
         if(name.length() > 20) cout << "Voice 1: TOO LONG! Give another name CHUMP" << endl << "Type your name in one line(<=20 characters): ";
         else break;
     }
-    Character player;
-
-    player.name = name; player.health = 100; player.description = "You, lost and no memory"; player.str = 30; player.def = 10; player.spd = 10; player.maxHealth = 100;
-    player.atks.push_back(punch); player.atks.push_back(tailWhip);
+    vector<Attack> playerAttacks;
+    playerAttacks.push_back(punch); playerAttacks.push_back(kick); playerAttacks.push_back(tailWhip);
+    Character player = CreateCharacter(name, "Lost", 100, 100, 20, 5, 10, playerAttacks, SittingMonkey);
     party.push_back(player);
 
     cout << "Voice 1: OK \"" << player.name << "\", if that really is your name CHUMP, my name is Brack" << endl;  Wait(3000);
@@ -47,9 +52,11 @@ void IntroSequence(){
 }
 
 void IntroSequencePath1(){
-        Character brackCharacter; brackCharacter.name = "Brack"; brackCharacter.health = 70; brackCharacter.str = 50; brackCharacter.spd = 0; brackCharacter.description = "Little stupid but has the right spirit, wants to sail the 7 seas"; brackCharacter.def = 5; brackCharacter.maxHealth = 100;
-        brackCharacter.atks.push_back(punch); brackCharacter.atks.push_back(tailWhip);
+        vector<Attack> brackAttacks;
+        brackAttacks.push_back(punch); brackAttacks.push_back(kick);
+        Character brackCharacter = CreateCharacter("Brack", "Lost", 60, 100, 30, 0, 0, brackAttacks, Brack);
         vector <Character> tempBrackParty; tempBrackParty.push_back(brackCharacter);
+        //This battle is impossible to lose
         BattleTime();
         if(Battle(tempBrackParty, party)) BattleWon();
         Clear();
@@ -64,8 +71,27 @@ void IntroSequencePath1(){
         cout << "You: ???" << endl;  Wait(2000);
         cout << "Brack: I don't like it here...." << endl;  Wait(2000);
         BrackFace(); Blank(1);
-        cout << "You: Fine. Let's find a way out" << endl;
-        
+        cout << "You: Fine. Let's find a way out" << endl; Wait(2000);
+        cout << "NEW PARTY MEMBER: BRACK" << endl;
+        brackCharacter = CreateCharacter("Brack", "Lost", 60, 100, 30, 10, 5.5, brackAttacks, Brack);
+        party.push_back(brackCharacter);
+        Clear();
+}
+
+void IntroSequencePath2(){
+    cout << "(Harith enters the room)" << endl; Wait(2000);
+    cout << "Harith: WHATS GOING ON HERE??" << endl; Wait(2000);
+    vector<Attack> brackAttacks;
+    brackAttacks.push_back(punch); brackAttacks.push_back(kick);
+    Character brackCharacter = CreateCharacter("Brack", "Lost", 60, 100, 30, 10, 5.5, brackAttacks, Brack);
+    party.push_back(brackCharacter);
+    vector<Attack> harithAttacks;
+    harithAttacks.push_back(intimidate); 
+    //Impossible to lose
+    Character harithCharacter = CreateCharacter("Harith", "Meanie", 100, 100, 10, 0, 0, harithAttacks, AngryHarith);
+    vector <Character> tempEnemyParty; tempEnemyParty.push_back(harithCharacter);
+    BattleTime();
+    if(Battle(tempEnemyParty, party)) BattleWon();
 }
 
 void IntroSequence2(){
@@ -85,20 +111,21 @@ void IntroSequence2(){
             continue;
         }
         else if (inp == "a"){
-            cout << "(You  Wait patiently, after a minute Brack comes back into the room alone)" << endl;  Wait(2000);
+            cout << "(You wait patiently, after a minute Brack comes back into the room alone)" << endl;  Wait(2000);
             cout << "Brack: I always hated that guy, he's moody but he'll calm down later" << endl;  Wait(2000);
             cout << "Brack: How did you end up here anyway?" << endl;  Wait(2000);
             cout << "You: I...don't remember" << endl;  Wait(2000);
             cout << "Brack: Playing dumb? Whatever. Eventually I'll figure it out" << endl;  Wait(2000);
             cout << "(You very much do not remember)" << endl;  Wait(2000);
             cout << "Brack: I always wanted to leave this place, this crew is mean" << endl;  Wait(2000);
-            cout << "Brack: How about this, I break you out of those ropes, we beat up Marith and then take a small boat to escape!";  Wait(3000);
+            cout << "Brack: How about this, I break you out of those ropes, we beat up Marith and then escape!" << endl;  Wait(3000);
             BrackFace();  Wait(2500); Blank(1);
             cout << "(Brack uses his nails to cut the rope, you are free)" << endl;  Wait(2000);
             cout << "Brack: Here's a mirror to see what you look like" << endl;  Wait(2000);
             cout << "(Brack pulls out a mirror)" << endl;  Wait(2000);
             SittingMonkey();
-            
+            Blank(2);
+            IntroSequencePath2();
         }
         else {
             cout << "(You use the screw to cut your restraints)" << endl;  Wait(2000);

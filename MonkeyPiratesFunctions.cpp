@@ -1,3 +1,9 @@
+/*
+Name: Vivaan Srivastav
+Date: March 30, 2024
+Purpose: Functions for the game, the most complex file here. Includes everything from quality of life to a complex battling function
+File name: MonkeyPiratesFunctions.cpp
+*/
 #include <bits/stdc++.h>
 #include "MonkeyPiratesVariables.h"
 #include <chrono>
@@ -57,10 +63,27 @@ Attack CreateAttackValues(string name, int dmg, int crit, int uses, int hit, str
 }
 
 void InitializeAttacks(){
-    punch = CreateAttackValues("Punch", 8, 15, 5, 90, "It's a punch!", PunchAscii);
-    kick = CreateAttackValues("Kick", 16, 25, 5, 70, "Slam your foot on them or sum", KickAscii);
+    punch = CreateAttackValues("Punch", 8, 15, 10, 90, "It's a punch!", PunchAscii);
+    kick = CreateAttackValues("Kick", 16, 25, 10, 70, "Slam your foot on them or sum", KickAscii);
     tailWhip = CreateAttackValues("Tail Whip", 4, 0, 400, 100, "Always hits, don't know why but don't question the whip", TailWhipAscii);
+    intimidate = CreateAttackValues("Intimidate", 6, 50, 5, 90, "The ascii is hilarious", IntimidateAscii);
 }
+
+// Function to create character, self explanatory
+Character CreateCharacter(string name, string description, double health, double maxHealth, double str, double def, double spd, vector<Attack> atks, void (Ascii)()){
+    Character character;
+    character.name = name;
+    character.description = description;
+    character.health = health;
+    character.maxHealth = maxHealth;
+    character.str = str;
+    character.def = def;
+    character.spd = spd;
+    character.atks = atks;
+    character.Ascii = Ascii;
+    return character;
+}
+
 
 //Function to repeat output n new blank lines
 void Blank(int n){

@@ -1,3 +1,9 @@
+/*
+Name: Vivaan Srivastav
+Date: March 30, 2024
+Purpose: Holds some of the random ascii art in the game
+File name: MonkeyPiratesAscii.cpp
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
