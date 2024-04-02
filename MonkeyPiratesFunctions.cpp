@@ -229,7 +229,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
                 cin >> inp;
                 if(isIntInRange(inp, 1, attacker.size()) && attacker[stoi(inp)-1].health > 0) break;
                 else {
-                    cout << "Invalid input, try again " << endl;
+                    cout << "Invalid input, try again. Input a number above, make sure the character is alive too " << endl;
                     continue;
                 }
             }
@@ -244,7 +244,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
                 cin >> inp;
                 if(isIntInRange(inp, 1, defender.size()) && defender[stoi(inp)-1].health > 0) break;
                 else {
-                    cout << "Invalid input, try again " << endl;
+                    cout << "Invalid input, try again. Input a number above, make sure the character is alive too." << endl;
                     continue;
                 }
             }
@@ -261,7 +261,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
                 cin >> inp;
                 if(isIntInRange(inp, 1, defender[memberAttackingNum].atks.size()) && defender[memberAttackingNum].atks[stoi(inp)-1].uses > 0) break;
                 else {
-                    cout << "Invalid input, try again " << endl;
+                    cout << "Invalid input, try again. Input a number above, make sure the attack has enough uses too" << endl;
                     continue;
                 }
             }
@@ -384,7 +384,7 @@ void OddOneOutRiddle(){
             cout << "Barto: Nice, your streak is now " << correctStreak << endl; Wait(2000);
         }
         else {
-            cout << "BLEHH, your streak is gone." << endl; Wait(2000);
+            cout << "BLEHH, your streak is gone. Just as a reminder, make sure the input is not seperated by a space too." << endl; Wait(2000);
             correctStreak = 0;
         }
     }
