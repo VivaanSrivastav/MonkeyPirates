@@ -167,7 +167,7 @@ void Task2(){
         vector<Attack> TwinAttacks;
         vector<Character> tempBattleVector;
         TwinAttacks.push_back(intimidate); TwinAttacks.push_back(slap);  TwinAttacks.push_back(throngle); TwinAttacks.push_back(kick);
-        Character RickyCharacter = CreateCharacter("Ricky", "Twin 1", 70, 70, 20, 8, 8, TwinAttacks, Ricky); // Initializing values
+        Character RickyCharacter = CreateCharacter("Ricky", "Twin 1", 90, 90, 20, 8, 8, TwinAttacks, Ricky); // Initializing values
         Character MartyCharacter = CreateCharacter("Marty", "Twin 2", 70, 70, 30, 5, 8, TwinAttacks, Marty); 
         tempBattleVector.push_back(RickyCharacter); tempBattleVector.push_back(MartyCharacter);
         if(Battle(tempBattleVector, party)) {

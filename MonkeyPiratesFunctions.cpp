@@ -361,8 +361,8 @@ If the user guesses right, correctStreak goes up, otherwise it resets.
 void OddOneOutRiddle(){
     Clear();
     cout << "Barto: Get 3 in a row right and you pass!" << endl; Wait(2000);
-
     int correctStreak = 0;
+    srand(time(NULL));
     while(correctStreak < 3){
         cout << "Barto: Let's go! " << endl; Wait(2000);
         int oddRow = rand() % 1 + 0;
