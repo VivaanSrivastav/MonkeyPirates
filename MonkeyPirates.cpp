@@ -1,7 +1,8 @@
 /*
 Name: Vivaan Srivastav
 Date: March 30, 2024
-Purpose: Main file for the game, runs functions from the MonkeyPiratesDialogue.cpp file
+Purpose: Main file for the game, runs functions from the MonkeyPiratesDialogue.cpp file. 
+This is a game where you play a captured pirate, and decide you need to escape.
 File name: MonkeyPirates.cpp
 */
 
@@ -14,12 +15,11 @@ File name: MonkeyPirates.cpp
 
 using namespace std;
 
-
 int main(){
     InitializeAttacks(); // Makes all the attacks
 
     while(true){
-        // Task 1, first battle
+        // Task 1, first battles
         IntroSequence();    
         IntroSequence2();
     

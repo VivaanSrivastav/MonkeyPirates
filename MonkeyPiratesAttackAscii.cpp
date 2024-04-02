@@ -1,10 +1,3 @@
-/*
-Name: Vivaan Srivastav
-Date: March 30, 2024
-Purpose: Holds the ascii art of the attacks in the game
-File name: MonkeyPiratesAttackAscii.cpp
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 void PunchAscii(){ // 15 lines

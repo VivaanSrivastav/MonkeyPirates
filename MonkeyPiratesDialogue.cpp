@@ -1,9 +1,3 @@
-/*
-Name: Vivaan Srivastav
-Date: March 30, 2024
-Purpose: Main story of the game, holds the functions ran in the main file
-File name: MonkeyPiratesDialogue.cpp
-*/
 #include <bits/stdc++.h>
 #include "MonkeyPiratesVariables.h"
 

@@ -1,9 +1,3 @@
-/*
-Name: Vivaan Srivastav
-Date: March 30, 2024
-Purpose: Functions for the game, the most complex file here. Includes everything from quality of life to a complex battling function
-File name: MonkeyPiratesFunctions.cpp
-*/
 #include <bits/stdc++.h>
 #include "MonkeyPiratesVariables.h"
 #include <chrono>
