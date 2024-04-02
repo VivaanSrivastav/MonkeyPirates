@@ -176,7 +176,7 @@ void BattleWon(){
    cout << "   \\ \\____________\\ \\_______\\ \\__\\\\ \\__\\                          " << endl;
    cout << "    \\|____________|\\|_______|\\|__| \\|__|                          " << endl;
    cout << "                                                                  " << endl;
-   Clear();
+   Wait(1000);
 }
 
 void BattleLost(){
@@ -198,5 +198,63 @@ void BattleLost(){
    cout << "    \\|_______|\\|_______|\\_________\\   \\|__|                       " << endl;
    cout << "                       \\|_________|                               " << endl;
    cout << "                                                                  " << endl;
+   Wait(1000);
 }
 
+void Ricky(){
+   cout << "" << endl;
+   cout << "                 / _,\\" << endl;
+   cout << "                 \\_\\" << endl;
+   cout << "      ,,,,    _,_)  #      /)" << endl;
+   cout << "     (= =)D__/    __/     //" << endl;
+   cout << "    C/^__)/     _(    ___//" << endl;
+   cout << "      \\_,/  -.   '-._/,--'" << endl;
+   cout << "_\\\\_,  /           -//." << endl;
+   cout << " \\_ \\_/  -,._ _     ) )" << endl;
+   cout << "   \\/    /    )    / /" << endl;
+   cout << "   \\-__,/    (    ( (" << endl;
+   cout << "              \\.__,-)\\_" << endl;
+   cout << "               )\\_ / -(" << endl;
+   cout << "              / -(////" << endl;
+   cout << "             ////" << endl;
+}
+
+void Marty(){
+   cout << "    EEEK!" << endl;
+   cout << "      /  \\   ~~|~~" << endl;
+   cout << "     (|00|)    |" << endl;
+   cout << "      (==)  --/" << endl;
+   cout << "    ___||___" << endl;
+   cout << "   / _ .. _ \\" << endl;
+   cout << "  //  |  |  \\\\" << endl;
+   cout << " //   |  |   \\\\" << endl;
+   cout << " ||  / /\\ \\  ||" << endl;
+   cout << "_|| _| || |_ ||_  " << endl;
+   cout << "\\|||___||___|||/" << endl;
+}
+
+void Barto(){
+   cout << "" << endl;
+   cout << "      |>(|)<|" << endl;
+   cout << "      .-'^'-." << endl;
+   cout << "     '/\"'\"^\"\\'" << endl;
+   cout << "    :( *   * ):" << endl;
+   cout << "    ::)  ,| (::" << endl;
+   cout << "    '(       )'          _." << endl;
+   cout << "     '\\ --- /'          / /" << endl;
+   cout << "   .-'       '-.      .__D" << endl;
+   cout << " ,\"      |      \\    / : (=|" << endl;
+   cout << ":   Y    |    \\  \\  /  : (=|" << endl;
+   cout << "|   |o__/ \\__o:   \\/  \" \\ \\" << endl;
+   cout << "|   |          \\     '   \"-." << endl;
+   cout << "|    `.    ___ \\:._.'" << endl;
+   cout << " \".__  \"-\" __ \\ \\" << endl;
+   cout << "  .|''---''------|               _" << endl;
+   cout << "  / -.          _\"\"-.--.        C )" << endl;
+   cout << " '    '/.___.--'        '._    : |" << endl;
+   cout << "|     --_   ^\"--...__      ''-.' |" << endl;
+   cout << "|        ''---.o)    \"\"._        |" << endl;
+   cout << " ^'--.._      |o)        '`-..._.jku" << endl;
+   cout << "        '--.._|o)" << endl;
+   cout << "              'O)" << endl;
+}

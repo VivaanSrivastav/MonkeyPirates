@@ -15,7 +15,7 @@ using namespace chrono; // nanoseconds, system_clock, seconds
 
 
 
-// Makes a line of equal sines, good for organization
+// Makes a line of equal signs, good for organization
 void Divider(){
     for(int i = 0; i < 150; i++) cout << '=';
     cout << endl;
@@ -48,7 +48,7 @@ double calculateDamage(Character attacker, Character defender, int attackNum){
     return dmgDone;
 }
 
-//2 functions below used to create attacks, pretty self explanatory
+//2 functions below used to create attacks, pretty self explanatory. Assigns each value to the attack
 Attack CreateAttackValues(string name, int dmg, int crit, int uses, int hit, string description, void (Ascii)()){
     Attack atk;
     atk.name = name;
@@ -63,13 +63,16 @@ Attack CreateAttackValues(string name, int dmg, int crit, int uses, int hit, str
 }
 
 void InitializeAttacks(){
-    punch = CreateAttackValues("Punch", 8, 15, 10, 90, "It's a punch!", PunchAscii);
-    kick = CreateAttackValues("Kick", 16, 25, 10, 70, "Slam your foot on them or sum", KickAscii);
-    tailWhip = CreateAttackValues("Tail Whip", 4, 0, 400, 100, "Always hits, don't know why but don't question the whip", TailWhipAscii);
+    punch = CreateAttackValues("Punch", 8, 15, 5, 90, "It's a punch!", PunchAscii);
+    kick = CreateAttackValues("Kick", 16, 25, 5, 70, "Slam your foot on them or sum", KickAscii);
+    tailWhip = CreateAttackValues("Tail Whip", 4, 0, 400, 100, "High hit rate, don't know why but don't question the whip", TailWhipAscii);
     intimidate = CreateAttackValues("Intimidate", 6, 50, 5, 90, "The ascii is hilarious", IntimidateAscii);
+    throngle = CreateAttackValues("Throngle", 10, 15, 15, 80, "You don't wanna know...", ThrongleAscii);
+    slap = CreateAttackValues("Slap", 7, 15, 15, 95, "Slap people", SlapAscii);
+    cornobble = CreateAttackValues("Cornobble", 20, 10, 3, 80, "Fishy move", CornobbleAscii);
 }
 
-// Function to create character, self explanatory
+// Function to create character, self explanatory, assigns values to the given character
 Character CreateCharacter(string name, string description, double health, double maxHealth, double str, double def, double spd, vector<Attack> atks, void (Ascii)()){
     Character character;
     character.name = name;
@@ -129,16 +132,19 @@ void Clear() {
     cout << "\x1B[2J\x1B[H";
 }
 
-// Flashes Ascii like a low budget animation
-void FlashAscii(void (Ascii)()){
+// Flashes Ascii like a low budget animation, alternates between the ascii of the attack and the ascii of the character using the attack
+void FlashAscii(void (Ascii)(), Character character){
     int repeats = 3;
     while(repeats--){
         Ascii();
-        Wait(500);
+        Wait(300);
         Clear();
-        Wait(500);
+        character.Ascii();
+        Wait(300);
+        Clear();
+        Wait(300);
     }
-    Wait(500);
+    Wait(400);
 }
 
 /*
@@ -168,7 +174,7 @@ void completeDamage(vector<Character> attacker, vector<Character> defender, int 
 }
 
 /*
-This battle function covers a lot.
+This battle function covers a lot, and also took me a decent amount of time.
 
 
 Battle manager:
@@ -202,7 +208,6 @@ If a member died, either defenderCount or attackerCount goes down (respectively)
 Note: Some slight repition of code at the end, but it was very difficult to try to not repeat. 
 I talked to you about it and you said it was fine, so don't dock marks pls.
 Also note that a lot of this can be shortened using pointers but that feels way overkill
-
 */
 bool Battle(vector<Character> attacker, vector<Character> defender){
     Clear();
@@ -228,12 +233,11 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             while(true){
                 cout << "Input one of the numbers above as the character you would like to attack: ";
                 cin >> inp;
-                if(isIntInRange(inp, 1, attacker.size())) break;
+                if(isIntInRange(inp, 1, attacker.size()) && attacker[stoi(inp)-1].health > 0) break;
                 else {
                     cout << "Invalid input, try again " << endl;
                     continue;
                 }
-                if(attacker[stoi(inp)-1].health == 0) cout << "This guy's already defeated! Pick another one that's listed above!" << endl;
             }
             memberDefendingNum = stoi(inp)-1;
             
@@ -244,12 +248,11 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             while(true){
                 cout << "Input one of the numbers above as the character you would like to attack with: ";
                 cin >> inp;
-                if(isIntInRange(inp, 1, defender.size())) break;
+                if(isIntInRange(inp, 1, defender.size()) && defender[stoi(inp)-1].health > 0) break;
                 else {
                     cout << "Invalid input, try again " << endl;
                     continue;
                 }
-                if(defender[stoi(inp)-1].health == 0) cout << "This guy's already defeated! Pick another one that's listed above!" << endl;
             }
             memberAttackingNum = stoi(inp)-1;
             Blank(2);
@@ -262,12 +265,11 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             while(true){
                 cout << "Input one of the numbers above as the attack you would like to use: ";
                 cin >> inp;
-                if(isIntInRange(inp, 1, defender[memberAttackingNum].atks.size())) break;
+                if(isIntInRange(inp, 1, defender[memberAttackingNum].atks.size()) && defender[memberAttackingNum].atks[stoi(inp)-1].uses > 0) break;
                 else {
                     cout << "Invalid input, try again " << endl;
                     continue;
                 }
-                if(defender[memberAttackingNum].atks[stoi(inp)-1].uses == 0) cout << "You ran out of uses here... Pick another attack!" << endl;
             }
             attackUsed = stoi(inp)-1; 
             dmgDone = calculateDamage(defender[memberAttackingNum], attacker[memberDefendingNum], attackUsed);
@@ -279,7 +281,11 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             memberAttackingNum = rand() % (attacker.size()) + 0;
             cout << attacker[memberAttackingNum].name << " is attacking now..."; Blank(2); Wait(1000);
             attackUsed = rand() % (attacker[memberAttackingNum].atks.size()) + 0; 
-            memberDefendingNum = rand() % (defender.size()) + 0;
+            memberDefendingNum = rand() % (defender.size()) + 0; 
+            while(true){ //loops to check if the targetted character isn't deal already.
+                if(defender[memberDefendingNum].health <= 0) memberDefendingNum = rand() % (defender.size()) + 0;
+                else break;
+            }
             dmgDone = calculateDamage(attacker[memberAttackingNum], defender[memberDefendingNum], attackUsed);
         }
 
@@ -292,7 +298,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             } 
             // Some slight repitition of code (very hard not to), but I talked to you about it and you said it was okay so I'll keep it.
         if(turn) { 
-            FlashAscii(defender[memberAttackingNum].atks[attackUsed].Ascii);
+            FlashAscii(defender[memberAttackingNum].atks[attackUsed].Ascii, defender[memberAttackingNum]);
             defender[memberAttackingNum].atks[attackUsed].uses--;
             attacker[memberDefendingNum].health-=dmgDone;
             if(attacker[memberDefendingNum].health <= 0){
@@ -305,7 +311,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             turn = false;
         }
         else {
-            FlashAscii(attacker[memberAttackingNum].atks[attackUsed].Ascii);
+            FlashAscii(attacker[memberAttackingNum].atks[attackUsed].Ascii, attacker[memberAttackingNum]);
             defender[memberDefendingNum].health-=dmgDone;
             attacker[memberAttackingNum].atks[attackUsed].uses--;
             if(defender[memberDefendingNum].health <= 0) {
@@ -318,6 +324,76 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             turn = true;
         }
     }
+    Clear();
     return true;
+}
+
+/*
+numsGiven counts the amount of numbers the user has been given, good for the user to know
+Then it loops through 5 numbers, with currentNum being the current number and ans being the product thus far. 
+If the user inputs the same as "ans", they pass.
+*/
+void ProductRiddle(){
+    while(true){
+        int numsGiven = 1;
+        Clear();
+        int ans = 1;
+        for(int i = 0; i < 5; i++){
+            int currentNum = rand() % 5 + 1;
+            ans*=currentNum;
+            cout << "Marty: number " << numsGiven << " is " << currentNum << endl; Wait(1000);
+            numsGiven++;
+            Clear();
+        }
+        cout << "Ricky: So what is " << endl; Wait(1000);
+        cout << "Marty: ... Your answer?" << endl;
+        cout << "Your answer (the product of the five numbers): ";
+        string inp; cin >> inp; 
+        if(inp == to_string(ans)) break;
+        cout << "Ricky: INCORRECT!" << endl; Wait(2000);
+        cout << "Marty: Try again." << endl; Wait(2000);
+    }
+    cout << "Ricky: You" << endl; Wait(1000);
+    cout << "Marty: Passed!" << endl; Wait(2000);
+}
+
+/*
+correctStreak counts how many in a row the user has gotten correct.
+Loops if the correct streak is less than 3.
+oddRow and oddColumn are there to randomize which spot on the 2x2 grid has "-" instead of "|".
+Then the 2d vector is created, with the odd spot being replaced.
+If the user guesses right, correctStreak goes up, otherwise it resets.
+*/
+void OddOneOutRiddle(){
+    Clear();
+    cout << "Barto: Get 3 in a row right and you pass!" << endl; Wait(2000);
+
+    int correctStreak = 0;
+    while(correctStreak < 3){
+        cout << "Barto: Let's go! " << endl; Wait(2000);
+        int oddRow = rand() % 1 + 0;
+        int oddColumn = rand() % 1 + 0;
+        vector<vector<string> > grid(2, vector<string>(2, "|"));
+        grid[oddRow][oddColumn] = "-";
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < 2; j++){
+                cout << grid[i][j];
+            }
+            cout << endl;
+        }
+        Wait(1500);
+        Clear();
+        cout << "Input your answer as said before (ie 11, or 21 etc): ";
+        string input; cin >> input;
+        if(input == to_string(oddRow+1) + to_string(oddColumn+1)) {
+            correctStreak++;
+            cout << "Barto: Nice, your streak is now " << correctStreak << endl; Wait(2000);
+        }
+        else {
+            cout << "BLEHH, your streak is gone." << endl; Wait(2000);
+            correctStreak = 0;
+        }
+    }
+    cout << "Barto: You pass!" << endl; Wait(2000);
 }
 

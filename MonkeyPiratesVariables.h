@@ -57,5 +57,6 @@ Attack tailWhip;
 Attack slap;
 Attack throngle;
 Attack intimidate;
+Attack cornobble;
 
 #endif

@@ -9,6 +9,7 @@ File name: MonkeyPiratesDialogue.cpp
 
 using namespace std;
 
+//Introductory sequence, most done her is getting the player's name and initializing their basic stats.
 void IntroSequence(){
     Blank(2);
     IntroText(); Blank(1);  Wait(1000);
@@ -27,13 +28,14 @@ void IntroSequence(){
     cout << "Voice 1: What's your name chump?" << endl << "Type your name in one line: " << endl;
 
     string name;
-    while(true) {
+    while(true) { // Getting name of player
         getline(cin, name);
         cout << endl;
         Wait(1000);
         if(name.length() > 20) cout << "Voice 1: TOO LONG! Give another name CHUMP" << endl << "Type your name in one line(<=20 characters): ";
         else break;
     }
+    // Initializing player
     vector<Attack> playerAttacks;
     playerAttacks.push_back(punch); playerAttacks.push_back(kick); playerAttacks.push_back(tailWhip);
     Character player = CreateCharacter(name, "Lost", 100, 100, 20, 5, 10, playerAttacks, SittingMonkey);
@@ -51,6 +53,7 @@ void IntroSequence(){
     Wait(2000); Clear();
 }
 
+// This is the "a" path to the IntroSequence2() function, where the user fights Brack
 void IntroSequencePath1(){
         vector<Attack> brackAttacks;
         brackAttacks.push_back(punch); brackAttacks.push_back(kick);
@@ -62,8 +65,6 @@ void IntroSequencePath1(){
         Clear();
         Wait(3000);
         Blank(3);
-        cout << "NEW MOVE \"INTIMIDATE\" LEARNED FOR " << party[0].name << endl; Wait(1000);
-        party[0].atks.push_back(intimidate);
         cout << "Brack: Maybe...I panicked too much. DONT HURT ME MORE PLEASE" << endl;  Wait(2000);
         cout << "You: I'm heading out" << endl;  Wait(2000);
         cout << "Brack: ..." << endl;  Wait(2000);
@@ -73,17 +74,18 @@ void IntroSequencePath1(){
         BrackFace(); Blank(1);
         cout << "You: Fine. Let's find a way out" << endl; Wait(2000);
         cout << "NEW PARTY MEMBER: BRACK" << endl;
-        brackCharacter = CreateCharacter("Brack", "Lost", 60, 100, 30, 10, 5.5, brackAttacks, Brack);
+        brackCharacter = CreateCharacter("Brack", "Dumb", 80, 100, 30, 10, 5.5, brackAttacks, Brack);
         party.push_back(brackCharacter);
         Clear();
 }
 
+// This is the "b" path to the IntroSequence2() function, where the user fights Harith with Brack
 void IntroSequencePath2(){
     cout << "(Harith enters the room)" << endl; Wait(2000);
     cout << "Harith: WHATS GOING ON HERE??" << endl; Wait(2000);
     vector<Attack> brackAttacks;
     brackAttacks.push_back(punch); brackAttacks.push_back(kick);
-    Character brackCharacter = CreateCharacter("Brack", "Lost", 60, 100, 30, 10, 5.5, brackAttacks, Brack);
+    Character brackCharacter = CreateCharacter("Brack", "Dumb", 80, 100, 30, 10, 5.5, brackAttacks, Brack);
     party.push_back(brackCharacter);
     vector<Attack> harithAttacks;
     harithAttacks.push_back(intimidate); 
@@ -93,8 +95,11 @@ void IntroSequencePath2(){
     BattleTime();
     if(Battle(tempEnemyParty, party)) BattleWon();
     cout << "(Harith passes out)" << endl; Wait(2000);
+    cout << "You: OK let's leave" << endl; Wait(2000);
+    cout << "Brack: I agree... " << endl; Wait(2000);
 }
 
+// Here the user selects which path to go down, at the end the result is the same, Brack joins.
 void IntroSequence2(){
     Blank(2);
     
@@ -119,7 +124,7 @@ void IntroSequence2(){
             cout << "Brack: Playing dumb? Whatever. Eventually I'll figure it out" << endl;  Wait(2000);
             cout << "(You very much do not remember)" << endl;  Wait(2000);
             cout << "Brack: I always wanted to leave this place, this crew is mean" << endl;  Wait(2000);
-            cout << "Brack: How about this, I break you out of those ropes, we beat up Marith and then escape!" << endl;  Wait(3000);
+            cout << "Brack: How about this, I break you out of those ropes, we beat up Harith and then escape!" << endl;  Wait(3000);
             BrackFace();  Wait(2500); Blank(1);
             cout << "(Brack uses his nails to cut the rope, you are free)" << endl;  Wait(2000);
             cout << "Brack: Here's a mirror to see what you look like" << endl;  Wait(2000);
@@ -127,6 +132,7 @@ void IntroSequence2(){
             SittingMonkey();
             Blank(2);
             IntroSequencePath2();
+            break;
         }
         else {
             cout << "(You use the screw to cut your restraints)" << endl;  Wait(2000);
@@ -138,7 +144,80 @@ void IntroSequence2(){
             cout << "You:  Wait  Wait  Wait" << endl;  Wait(2500);
             cout << "Brack: AAAAAA" << endl;  Wait(2000);
             IntroSequencePath1();
+            break;
         }
     }
+    cout << "NEW MOVE \"INTIMIDATE\" LEARNED FOR " << party[0].name << endl; Wait(2000);
+    cout << "NEW MOVE \"THRONGLE\" LEARNED FOR BRACK" << endl; Wait(1500);
+    party[0].atks.push_back(intimidate);
+    party[1].atks.push_back(throngle);
 }
+
+// Here the user meets Ricky and Marty, first the ProductRiddle() is called for the riddle, then they have a battle, with the twins being iniitialized.
+void Task2(){
+    Clear();
+    cout << "(You and Brack travel to another room)" << endl; Wait(2000);
+    cout << "Brack: CRAP! It's Ricky and Marty! Those twins don't let you by if you don't answer their dumb riddle!" << endl; Wait(2000);
+    cout << "Ricky: Well well well Brack!" << endl; Wait(2000);
+    cout << "Marty: And... I don't know who" << endl; Wait(2000);
+    cout << "Ricky: Here's our riddle for today! Marty will give you 5 numbers and you must tell us the product of them combined!" << endl; Wait(4000);
+    cout << "Marty: Let's go!" << endl; Wait(2000);
+    ProductRiddle();
+    Clear(); Wait(2000);
+    cout << "Ricky: Now that I think about it... who is that other guy, Brack?" << endl; Wait(2000);
+    cout << "Marty: Hmmm" << endl; Wait(2000);
+    cout << "Ricky: GET THEM, THAT'S THE PRISONER! BRACK YOU TRAITOR" << endl; Wait(2000);
+    vector<Character> saveParty = party;
+    while(true){
+        party = saveParty;
+        vector<Attack> TwinAttacks;
+        vector<Character> tempBattleVector;
+        TwinAttacks.push_back(intimidate); TwinAttacks.push_back(slap);  TwinAttacks.push_back(throngle); TwinAttacks.push_back(kick);
+        Character RickyCharacter = CreateCharacter("Ricky", "Twin 1", 70, 70, 20, 8, 8, TwinAttacks, Ricky); //ascii
+        Character MartyCharacter = CreateCharacter("Marty", "Twin 2", 70, 70, 30, 5, 8, TwinAttacks, Marty); //ascii
+        tempBattleVector.push_back(RickyCharacter); tempBattleVector.push_back(MartyCharacter);
+        if(Battle(tempBattleVector, party)) {
+            BattleWon();
+            break;
+        }
+        BattleLost();
+        cout << "Restarting battle... Win this time you loser" << endl; Wait(2000);
+    }
+    cout << "(Ricky passes out)" << endl; Wait(2000);
+    vector<Attack> TwinAttacks;
+    TwinAttacks.push_back(intimidate); TwinAttacks.push_back(slap);  TwinAttacks.push_back(throngle); TwinAttacks.push_back(kick);
+    Character MartyCharacter = CreateCharacter("Marty", "Twin 2", 70, 70, 20, 5, 8, TwinAttacks, Marty);
+    cout << "Marty: WAIT WAIT" << endl; Wait(2000);
+    cout << "Brack: What??" << endl; Wait(2000);
+    cout << "Marty: Can I know what's going on?" << endl; Wait(2000);
+    cout << "You: We're escaping" << endl; Wait(2000);
+    cout << "Marty: Can I come with...?" << endl; Wait(2000);
+    cout << "Brack: ..." << endl; Wait(2000);
+    cout << "You: Ok.. Sure" << endl; Wait(2000);
+    cout << "All 3 of you leave the current room and head towards the escape boats" << endl;
+}
+
+// Final sequence with Barto's test to see if the user can spot the fake. It calls "OddOneOutRiddle", when the user wins then the game ends.
+void Task3(){
+    Clear();
+    cout << "All 3 of you go to the spare boat lounge" << endl; Wait(2000);
+    cout << "Brack: OH NO" << endl; Wait(2000);
+    cout << "Marty: It's Barto and his goons... They usually hang here watching the boats. " << endl; Wait(3000);
+    cout << "You: Who?" << endl; Wait(2000);
+    cout << "Barto: HEY HEY HEY YOU GUYS BRACK AND MARTY" << endl;
+    cout << "Brack: Ruh oh" << endl; Wait(2000);
+    cout << "Barto: Looks like you guys can't spot that guy you're walking with! He's not a part of our crew!" << endl; Wait(2000);
+    cout << "Brack: Yes he is, he's new!!" << endl; Wait(2000);
+    cout << "Barto: If you're so good at spotting fakes, look at my 9 goons line up! Tell me which one looks off!" << endl; Wait(2000);
+    cout << "Instructions: Look at the grind and point out which character is the odd one out, in the form of a grid coordinate" << endl; Wait(2000);
+    cout << "1 1" << endl << "2 1" << endl << "In the above example, the correct answer would be \"12\", as it is in row 1, column 2" << endl; Wait(6000);
+    Clear();
+    OddOneOutRiddle();
+    Clear();
+
+    cout << "Barto: Seems I misunderstood, you may pass..." << endl; Wait(2000);
+    Barto(); Wait(2000);
+    cout << "You, Brack, and Marty decide to take a boat and sail away... THE END" << endl; Wait(2000);
+}
+
 

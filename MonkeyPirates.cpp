@@ -16,14 +16,34 @@ using namespace std;
 
 
 int main(){
-    InitializeAttacks();
-    
-    // Task 1, first battle
-    IntroSequence();    
-    IntroSequence2();
-    
-    // Task 2, second battle
+    InitializeAttacks(); // Makes all the attacks
 
-    // Task 3, final battle
-
+    while(true){
+        // Task 1, first battle
+        IntroSequence();    
+        IntroSequence2();
+    
+        // Task 2, second battle with Ricky and Marty
+        Task2();
+        // Task 3, final task with Barto
+        Task3();
+        // Asking input to play again, if they do then it resets the party.
+        cout << "Play again? (input y or n)" << endl;
+        bool playAgain;
+        while (true)
+        {
+            string input; cin >> input;
+            if(input == "y") {
+                cout << "Restarting.... " << endl;
+                Clear();
+                playAgain = true;
+                break;
+            } else if(input == "n") {
+                cout << "Cya!" << endl;
+                break;
+            } else cout << "Invalid input! Input y or n:" << endl;
+        }
+        if(playAgain) party.clear();
+        else break;
+    }
 }
