@@ -206,10 +206,10 @@ void Task3(){
     cout << "You: Who?" << endl; Wait(2000);
     cout << "Barto: HEY HEY HEY YOU GUYS BRACK AND MARTY" << endl;
     cout << "Brack: Ruh oh" << endl; Wait(2000);
-    cout << "Barto: Looks like you guys can't spot that guy you're walking with! He's not a part of our crew!" << endl; Wait(2000);
+    cout << "Barto: Looks like you guys can't spot that guy you're walking with! He's not a part of our crew!" << endl; Wait(3000);
     cout << "Brack: Yes he is, he's new!!" << endl; Wait(2000);
-    cout << "Barto: If you're so good at spotting fakes, look at my 9 goons line up! Tell me which one looks off!" << endl; Wait(2000);
-    cout << "Instructions: Look at the grind and point out which character is the odd one out, in the form of a grid coordinate" << endl; Wait(2000);
+    cout << "Barto: If you're so good at spotting fakes, look at my 4 goons line up! Tell me which one looks off!" << endl; Wait(3000);
+    cout << "Instructions: Look at the grid and point out which character is the odd one out, in the form of a grid coordinate" << endl; Wait(4000);
     cout << "1 1" << endl << "2 1" << endl << "In the above example, the correct answer would be \"12\", as it is in row 1, column 2" << endl; Wait(6000);
     Clear();
     OddOneOutRiddle();
