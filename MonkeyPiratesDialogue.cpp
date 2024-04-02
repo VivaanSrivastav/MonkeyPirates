@@ -167,21 +167,21 @@ void Task2(){
     cout << "Ricky: Now that I think about it... who is that other guy, Brack?" << endl; Wait(2000);
     cout << "Marty: Hmmm" << endl; Wait(2000);
     cout << "Ricky: GET THEM, THAT'S THE PRISONER! BRACK YOU TRAITOR" << endl; Wait(2000);
-    vector<Character> saveParty = party;
+    vector<Character> saveParty = party; // Saves the current state, so if the following battle is lost, the user can restart as if nothing happened
     while(true){
         party = saveParty;
         vector<Attack> TwinAttacks;
         vector<Character> tempBattleVector;
         TwinAttacks.push_back(intimidate); TwinAttacks.push_back(slap);  TwinAttacks.push_back(throngle); TwinAttacks.push_back(kick);
-        Character RickyCharacter = CreateCharacter("Ricky", "Twin 1", 70, 70, 20, 8, 8, TwinAttacks, Ricky); //ascii
-        Character MartyCharacter = CreateCharacter("Marty", "Twin 2", 70, 70, 30, 5, 8, TwinAttacks, Marty); //ascii
+        Character RickyCharacter = CreateCharacter("Ricky", "Twin 1", 70, 70, 20, 8, 8, TwinAttacks, Ricky); // Initializing values
+        Character MartyCharacter = CreateCharacter("Marty", "Twin 2", 70, 70, 30, 5, 8, TwinAttacks, Marty); 
         tempBattleVector.push_back(RickyCharacter); tempBattleVector.push_back(MartyCharacter);
         if(Battle(tempBattleVector, party)) {
             BattleWon();
             break;
         }
         BattleLost();
-        cout << "Restarting battle... Win this time you loser" << endl; Wait(2000);
+        cout << "Restarting battle... Win this time you loser" << endl; Wait(2000); // If they lose, the loop continues
     }
     cout << "(Ricky passes out)" << endl; Wait(2000);
     vector<Attack> TwinAttacks;
