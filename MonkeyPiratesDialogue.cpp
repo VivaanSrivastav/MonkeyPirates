@@ -204,7 +204,7 @@ void Task3(){
     cout << "Brack: Yes he is, he's new!!" << endl; Wait(2000);
     cout << "Barto: If you're so good at spotting fakes, look at my 9 goons line up! Tell me which one looks off!" << endl; Wait(3000);
     cout << "Instructions: Look at the grid and point out which character is the odd one out, in the form of a grid coordinate" << endl; Wait(4000);
-    cout << "1 1 1" << endl << "2 1 1" << endl << "1 1 1" << endl << "In the above example, the correct answer would be \"21\", as it is in row 2, column 1. Rows are counted from the top going down, columns are counted going left to right" << endl; Wait(6000);
+    cout << "1 1 1" << endl << "2 1 1" << endl << "1 1 1" << endl << "In the above example, the correct answer would be \"21\", as it is in row 2, column 1." << endl << "Rows are counted from the top going down, columns are counted going left to right" << endl; Wait(3000);
     cout << "Input anything to continue: "; 
     string trashInput; cin >> trashInput;
     Clear();

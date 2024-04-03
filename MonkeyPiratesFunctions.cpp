@@ -356,7 +356,7 @@ void ProductRiddle(){
 
 /*
 correctStreak counts how many in a row the user has gotten correct.
-Loops if the correct streak is less than 3 (starts at 1 to avoid divide by 0 error later).
+Loops if the correct streak is less than 3 
 It shows up for less time the higher your streak is
 oddRow and oddColumn are there to randomize which spot on the 3x3 grid has "-" instead of "|".
 Then the 2d vector is created, with the odd spot being replaced.
@@ -365,8 +365,8 @@ If the user guesses right, correctStreak goes up, otherwise it resets.
 void OddOneOutRiddle(){
     Clear();
     cout << "Barto: Get 3 in a row right and you pass!" << endl; Wait(2000);
-    int correctStreak = 1;
-    while(correctStreak < 4){
+    int correctStreak = 0;
+    while(correctStreak < 3){
         srand(time(NULL));
         cout << "Barto: Let's go! " << endl; Wait(2000);
         int oddRow = rand() % 3 + 1;
