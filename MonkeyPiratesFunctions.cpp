@@ -321,24 +321,30 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
 
 /*
 numsGiven counts the amount of numbers the user has been given, good for the user to know
-Then it loops through 5 numbers, with currentNum being the current number and ans being the product thus far. 
+messageGiven chooses which message to output, makes it confusing to read which is fun
+Then it loops through 6 numbers, with currentNum being the current number and ans being the product thus far. 
 If the user inputs the same as "ans", they pass.
 */
 void ProductRiddle(){
     while(true){
+        srand(time(NULL));
         int numsGiven = 1;
         Clear();
         int ans = 1;
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 6; i++){
             int currentNum = rand() % 5 + 1;
+            int messageGiven = rand() % 2 + 1;
             ans*=currentNum;
-            cout << "Marty: number " << numsGiven << " is " << currentNum << endl; Wait(1000);
+            if(messageGiven == 1){
+                cout << "Marty: Number " << numsGiven << " is " << currentNum << endl; 
+            } else cout << "Marty: " << currentNum << " is number " << numsGiven << " on the list" << endl; 
+            Wait(2000);
             numsGiven++;
             Clear();
         }
         cout << "Ricky: So what is " << endl; Wait(1000);
         cout << "Marty: ... Your answer?" << endl;
-        cout << "Your answer (the product of the five numbers): ";
+        cout << "Your answer (the product of the six numbers): ";
         string inp; cin >> inp; 
         if(inp == to_string(ans)) break;
         cout << "Ricky: INCORRECT!" << endl; Wait(2000);
@@ -350,24 +356,25 @@ void ProductRiddle(){
 
 /*
 correctStreak counts how many in a row the user has gotten correct.
-Loops if the correct streak is less than 3.
-oddRow and oddColumn are there to randomize which spot on the 2x2 grid has "-" instead of "|".
+Loops if the correct streak is less than 3 (starts at 1 to avoid divide by 0 error later).
+It shows up for less time the higher your streak is
+oddRow and oddColumn are there to randomize which spot on the 3x3 grid has "-" instead of "|".
 Then the 2d vector is created, with the odd spot being replaced.
 If the user guesses right, correctStreak goes up, otherwise it resets.
 */
 void OddOneOutRiddle(){
     Clear();
     cout << "Barto: Get 3 in a row right and you pass!" << endl; Wait(2000);
-    int correctStreak = 0;
-    srand(time(NULL));
-    while(correctStreak < 3){
+    int correctStreak = 1;
+    while(correctStreak < 4){
+        srand(time(NULL));
         cout << "Barto: Let's go! " << endl; Wait(2000);
-        int oddRow = rand() % 1 + 0;
-        int oddColumn = rand() % 1 + 0;
-        vector<vector<string> > grid(2, vector<string>(2, "|"));
-        grid[oddRow][oddColumn] = "-";
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < 2; j++){
+        int oddRow = rand() % 3 + 1;
+        int oddColumn = rand() % 3 + 1;
+        vector<vector<string> > grid(3, vector<string>(3, "|"));
+        grid[oddRow-1][oddColumn-1] = "-";
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
                 cout << grid[i][j];
             }
             cout << endl;
@@ -376,12 +383,12 @@ void OddOneOutRiddle(){
         Clear();
         cout << "Input your answer as said before (ie 11, or 21 etc): ";
         string input; cin >> input;
-        if(input == to_string(oddRow+1) + to_string(oddColumn+1)) {
+        if(input == to_string(oddRow) + to_string(oddColumn)) {
             correctStreak++;
             cout << "Barto: Nice, your streak is now " << correctStreak << endl; Wait(2000);
         }
         else {
-            cout << "BLEHH, your streak is gone. Just as a reminder, make sure the input is not seperated by a space too." << endl; Wait(2000);
+            cout << "BLEHH, your streak is gone (if it existed). Just as a reminder, make sure the input is not seperated by a space too." << endl; Wait(2000);
             correctStreak = 0;
         }
     }

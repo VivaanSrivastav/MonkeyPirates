@@ -154,7 +154,7 @@ void Task2(){
     cout << "Brack: CRAP! It's Ricky and Marty! Those twins don't let you by if you don't answer their dumb riddle!" << endl; Wait(2000);
     cout << "Ricky: Well well well Brack!" << endl; Wait(2000);
     cout << "Marty: And... I don't know who" << endl; Wait(2000);
-    cout << "Ricky: Here's our riddle for today! Marty will give you 5 numbers and you must tell us the product of them combined!" << endl; Wait(4000);
+    cout << "Ricky: Here's our riddle for today! Marty will give you 6 numbers and you must tell us the product of them combined!" << endl; Wait(4000);
     cout << "Marty: Let's go!" << endl; Wait(2000);
     ProductRiddle();
     Clear(); Wait(2000);
@@ -202,9 +202,11 @@ void Task3(){
     cout << "Brack: Ruh oh" << endl; Wait(2000);
     cout << "Barto: Looks like you guys can't spot that guy you're walking with! He's not a part of our crew!" << endl; Wait(3000);
     cout << "Brack: Yes he is, he's new!!" << endl; Wait(2000);
-    cout << "Barto: If you're so good at spotting fakes, look at my 4 goons line up! Tell me which one looks off!" << endl; Wait(3000);
+    cout << "Barto: If you're so good at spotting fakes, look at my 9 goons line up! Tell me which one looks off!" << endl; Wait(3000);
     cout << "Instructions: Look at the grid and point out which character is the odd one out, in the form of a grid coordinate" << endl; Wait(4000);
-    cout << "1 1" << endl << "2 1" << endl << "In the above example, the correct answer would be \"12\", as it is in row 1, column 2" << endl; Wait(6000);
+    cout << "1 1 1" << endl << "2 1 1" << endl << "1 1 1" << endl << "In the above example, the correct answer would be \"21\", as it is in row 2, column 1. Rows are counted from the top going down, columns are counted going left to right" << endl; Wait(6000);
+    cout << "Input anything to continue: "; 
+    string trashInput; cin >> trashInput;
     Clear();
     OddOneOutRiddle();
     Clear();
