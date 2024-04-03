@@ -357,7 +357,6 @@ void ProductRiddle(){
 /*
 correctStreak counts how many in a row the user has gotten correct.
 Loops if the correct streak is less than 3 
-It shows up for less time the higher your streak is
 oddRow and oddColumn are there to randomize which spot on the 3x3 grid has "-" instead of "|".
 Then the 2d vector is created, with the odd spot being replaced.
 If the user guesses right, correctStreak goes up, otherwise it resets.
