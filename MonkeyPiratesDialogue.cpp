@@ -69,7 +69,7 @@ void IntroSequencePath1(){
         cout << "You: Fine. Let's find a way out" << endl; Wait(2000);
         cout << "NEW PARTY MEMBER: BRACK" << endl;
         brackCharacter = CreateCharacter("Brack", "Dumb", 80, 100, 30, 10, 5.5, brackAttacks, Brack);
-        party.push_back(brackCharacter);
+        party.push_back(brackCharacter); //Brack joining the party
         Clear();
 }
 
@@ -172,7 +172,7 @@ void Task2(){
         tempBattleVector.push_back(RickyCharacter); tempBattleVector.push_back(MartyCharacter);
         if(Battle(tempBattleVector, party)) {
             BattleWon();
-            break;
+            break; // Breaking loop if the battle is won
         }
         BattleLost();
         cout << "Restarting battle... Win this time you loser" << endl; Wait(2000); // If they lose, the loop continues

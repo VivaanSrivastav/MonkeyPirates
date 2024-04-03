@@ -173,9 +173,6 @@ This battle function covers a lot, and also took me a decent amount of time.
 
 Battle manager:
 The "attacker" is always the NPC party attacking the player, with "defender" always being the main character's party
-dialogueAttacker and dialogueDefender are there to add stuff for both sides to say, situational depending on the fight
-asciiAttacker and asciiDefender are general asciis to use to represent the party
-Difficulty TBD
 
 It runs a "while(true)" loop until all members of a party are defeated
 memberAttackingNum keeps track of who is attacking on the current turn.
@@ -276,7 +273,7 @@ bool Battle(vector<Character> attacker, vector<Character> defender){
             cout << attacker[memberAttackingNum].name << " is attacking now..."; Blank(2); Wait(1000);
             attackUsed = rand() % (attacker[memberAttackingNum].atks.size()) + 0; 
             memberDefendingNum = rand() % (defender.size()) + 0; 
-            while(true){ //loops to check if the targetted character isn't deal already.
+            while(true){ //loops to check if the targetted character isn't dead already.
                 if(defender[memberDefendingNum].health <= 0) memberDefendingNum = rand() % (defender.size()) + 0;
                 else break;
             }
